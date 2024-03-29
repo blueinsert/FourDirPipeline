@@ -6,8 +6,12 @@ public class FourPipelineCreater : MonoBehaviour
 {
     public GameObject m_jointPrefab;
     public int m_jointCount;
+    public Vector3 m_jointAxisDir = new Vector3(0, 1, 0);
     public float m_jointOffset;
     public float m_jointRotateDegreeMax = 15f;
+    public bool m_useGravity;
+    public float m_driveStifness = 9999f;
+    public float m_driveDamp = 10000f;
 
     // Start is called before the first frame update
     void Start()
@@ -27,11 +31,13 @@ public class FourPipelineCreater : MonoBehaviour
         var parent = this.transform;
         for(int i=0;i<m_jointCount;i++) {
             var go = Instantiate(m_jointPrefab, parent);
-            go.transform.localPosition = new Vector3(0, m_jointOffset, 0);
+            go.transform.localPosition = m_jointAxisDir * m_jointOffset;// new Vector3(0, m_jointOffset, 0);
             parent = go.transform;
             FourPipelineJointController ctrl = go.GetComponent<FourPipelineJointController>();
             ctrl.SetLinkType(jointType);
             ctrl.SetRotateLimit(Mathf.Abs(m_jointRotateDegreeMax));
+            ctrl.SetDriveProperty(m_driveStifness, m_driveDamp);
+            //ctrl.m_articulationBody.useGravity = m_useGravity;
             if (jointType == FourPipelineJointType.Vertical)
                 jointType = FourPipelineJointType.Horizonal;
             else if (jointType == FourPipelineJointType.Horizonal)

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public enum FourPipelineJointType
 {
@@ -40,6 +41,19 @@ public class FourPipelineJointController : MonoBehaviour
     public void SetRotateLimit(float max)
     {
         m_rotateLimit = new Vector2(-max, max);
+        var temp = m_articulationBody.xDrive;
+        temp.lowerLimit = -max;
+        temp.upperLimit = max;
+        m_articulationBody.xDrive = temp;
+    }
+
+    public void SetDriveProperty(float stiffness,float damp)
+    {
+        var temp = m_articulationBody.xDrive;
+        temp.driveType = ArticulationDriveType.Target;
+        temp.stiffness = stiffness;
+        temp.damping = damp;
+        m_articulationBody.xDrive = temp;
     }
 
     public void SetValue(float value)
