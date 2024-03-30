@@ -163,8 +163,8 @@ MonoBehaviour:
   m_jointOffset: 2
   m_jointRotateDegreeMax: 12
   m_useGravity: 0
-  m_driveStifness: 10000000
-  m_driveDamp: 100
+  m_driveStifness: 100000
+  m_driveDamp: 1000
 --- !u!65 &75961496
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -823,8 +823,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 961739749}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.014181488, y: -0.7612614, z: 0.016682975, w: -0.64807546}
-  m_LocalPosition: {x: -4.292626, y: 1.1185607, z: 0.6939676}
+  m_LocalRotation: {x: -0.17683241, y: -0.7923263, z: 0.27085975, w: -0.5172856}
+  m_LocalPosition: {x: -29.941584, y: 122.06685, z: 56.440434}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

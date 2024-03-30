@@ -15,17 +15,17 @@ public class FourPipelineController : MonoBehaviour
        foreach(var jointCtrl in GetComponentsInChildren<FourPipelineJointController>())
        {
             m_joints.Add(jointCtrl);
-            //jointCtrl.m_articulationBody.enabled = true;
        }
         Instance = this;
     }
 
     public  void StartSimulation()
     {
-        this.GetComponent<ArticulationBody>().enabled = true;
+        FourPipelineJointController prev = null;
         foreach (var jointCtrl in GetComponentsInChildren<FourPipelineJointController>())
         {
-            jointCtrl.m_articulationBody.enabled = true;
+            jointCtrl.InitPhysicsComps(prev);
+            prev = jointCtrl;
         }
     }
 

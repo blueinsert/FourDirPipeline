@@ -18,6 +18,10 @@ public class FourPipelineJointController : MonoBehaviour
     public Vector2 m_rotateLimit = new Vector2(-15, 15);
 
     public FourPipelineJointType m_type;
+
+    public float m_targetValue;
+    public float m_speed = 500;
+
     public void SetLinkType(FourPipelineJointType type)
     {
         m_type = type;
@@ -47,7 +51,7 @@ public class FourPipelineJointController : MonoBehaviour
         m_articulationBody.xDrive = temp;
     }
 
-    public void SetDriveProperty(float stiffness,float damp)
+    public void SetDriveProperty(float stiffness, float damp)
     {
         var temp = m_articulationBody.xDrive;
         temp.driveType = ArticulationDriveType.Target;
@@ -58,11 +62,37 @@ public class FourPipelineJointController : MonoBehaviour
 
     public void SetValue(float value)
     {
-        var temp = m_articulationBody.xDrive;
         value = (value + 1.0f) / 2;
         value = Mathf.Clamp01(value);
-        temp.target = Mathf.Lerp(m_rotateLimit.x, m_rotateLimit.y, value);
-        m_articulationBody.xDrive = temp;
+        m_targetValue = Mathf.Lerp(m_rotateLimit.x, m_rotateLimit.y, value);
     }
-    
+
+
+    void FixedUpdate()
+    {
+        var dist = m_targetValue - CurrentPrimaryAxisRotation();
+        if (Mathf.Abs(dist) < 0.01f)
+        {
+            RotateTo(m_targetValue);
+            return;
+        }
+        var sign = Mathf.Sign(m_targetValue - CurrentPrimaryAxisRotation());
+        float rotationChange = sign * Mathf.Abs(dist) * m_speed * Time.fixedDeltaTime;
+        float rotationGoal = CurrentPrimaryAxisRotation() + rotationChange;
+        RotateTo(rotationGoal);
+    }
+
+    float CurrentPrimaryAxisRotation()
+    {
+        float currentRotationRads = m_articulationBody.jointPosition[0];
+        float currentRotation = Mathf.Rad2Deg * currentRotationRads;
+        return currentRotation;
+    }
+
+    void RotateTo(float primaryAxisRotation)
+    {
+        var drive = m_articulationBody.xDrive;
+        drive.target = primaryAxisRotation;
+        m_articulationBody.xDrive = drive;
+    }
 }
