@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class FourPipelineController : MonoBehaviour
@@ -22,10 +23,13 @@ public class FourPipelineController : MonoBehaviour
     public  void StartSimulation()
     {
         FourPipelineJointController prev = null;
-        foreach (var jointCtrl in GetComponentsInChildren<FourPipelineJointController>())
+        int i = 0;
+        var all = GetComponentsInChildren<FourPipelineJointController>();
+        foreach (var jointCtrl in all)
         {
-            jointCtrl.InitPhysicsComps(prev);
+            jointCtrl.InitPhysicsComps(prev, all.Count() - i);
             prev = jointCtrl;
+            i++;
         }
     }
 

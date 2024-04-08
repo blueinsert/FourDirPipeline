@@ -36,7 +36,8 @@ public class FourPipelineCreater : MonoBehaviour
             FourPipelineJointController ctrl = go.GetComponent<FourPipelineJointController>();
             ctrl.SetLinkType(jointType);
             ctrl.SetRotateLimit(Mathf.Abs(m_jointRotateDegreeMax));
-            ctrl.SetDriveProperty(m_driveStifness, m_driveDamp);
+            float k = m_jointCount - i;
+            ctrl.SetDriveProperty(m_driveStifness*k, m_driveDamp*k);
             //ctrl.m_articulationBody.useGravity = m_useGravity;
             if (jointType == FourPipelineJointType.Vertical)
                 jointType = FourPipelineJointType.Horizonal;

@@ -887,7 +887,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_jointPrefab: {fileID: 70736057932148481, guid: cccaf6d5fa7eb794398e39ce7aac185d,
     type: 3}
-  m_jointCount: 15
+  m_jointCount: 30
   m_jointAxisDir: {x: 0, y: 1, z: 0}
   m_jointOffset: 2
   m_jointRotateDegreeMax: 15

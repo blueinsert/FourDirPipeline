@@ -54,7 +54,7 @@ public class FourPipelineJointController : MonoBehaviour
     public void SetDriveProperty(float stiffness, float damp)
     {
         var temp = m_articulationBody.xDrive;
-        temp.driveType = ArticulationDriveType.Target;
+        //temp.driveType = ArticulationDriveType.Force;
         temp.stiffness = stiffness;
         temp.damping = damp;
         m_articulationBody.xDrive = temp;

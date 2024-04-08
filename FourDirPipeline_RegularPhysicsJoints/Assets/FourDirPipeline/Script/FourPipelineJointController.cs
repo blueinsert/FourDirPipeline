@@ -36,11 +36,11 @@ public class FourPipelineJointController : MonoBehaviour
         m_linkVNode.SetActive(false);
     }
 
-    public void InitPhysicsComps(FourPipelineJointController prev)
+    public void InitPhysicsComps(FourPipelineJointController prev,float k)
     {
         var rigibody = this.gameObject.AddComponent<Rigidbody>();
-        rigibody.mass = 0.01f;
-        rigibody.useGravity = false;
+        rigibody.mass = 0.001f;
+        rigibody.useGravity = true;
         if (prev != null)
         {
             var hingeJoint = this.gameObject.AddComponent<HingeJoint>();
@@ -56,8 +56,8 @@ public class FourPipelineJointController : MonoBehaviour
             };
             hingeJoint.useSpring = true;
             hingeJoint.spring = new JointSpring() {
-                spring = 10000,
-                damper = 1000,
+                spring = 100000*k,
+                damper = 1000*k,
                 targetPosition = 0,
             };
             m_hingeJoint = hingeJoint;
@@ -86,5 +86,10 @@ public class FourPipelineJointController : MonoBehaviour
             m_hingeJoint.spring = springSetting;
         } 
     }
-    
+
+    public void FixedUpdate()
+    {
+        
+    }
+
 }
