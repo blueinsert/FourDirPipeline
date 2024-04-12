@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class FourPipelineController : MonoBehaviour
+public class FourPipelineController_Configurable : MonoBehaviour
 {
-    public static FourPipelineController Instance;
+    public static FourPipelineController_Configurable Instance;
 
-    public List<FourPipelineJointController> m_joints = new List<FourPipelineJointController>();
+    public List<FourPipelineJointController_Configurable> m_joints = new List<FourPipelineJointController_Configurable>();
     public float m_horizontalValue = 0;
     public float m_verticalValue = 0;
 
     public void Init()
     {
-       foreach(var jointCtrl in GetComponentsInChildren<FourPipelineJointController>())
+       foreach(var jointCtrl in GetComponentsInChildren<FourPipelineJointController_Configurable>())
        {
             m_joints.Add(jointCtrl);
        }
@@ -22,9 +22,9 @@ public class FourPipelineController : MonoBehaviour
 
     public  void StartSimulation()
     {
-        FourPipelineJointController prev = null;
+        FourPipelineJointController_Configurable prev = null;
         int i = 0;
-        var all = GetComponentsInChildren<FourPipelineJointController>();
+        var all = GetComponentsInChildren<FourPipelineJointController_Configurable>();
         foreach (var jointCtrl in all)
         {
             jointCtrl.InitPhysicsComps(prev, i, all.Count());

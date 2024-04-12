@@ -36,14 +36,14 @@ public class FourPipelineJointController : MonoBehaviour
         m_linkVNode.SetActive(false);
     }
 
-    public void InitPhysicsComps(FourPipelineJointController prev,float k)
+    public void InitPhysicsComps(FourPipelineJointController prev,int index, int all)
     {
-        var rigibody = this.gameObject.AddComponent<Rigidbody>();
-        rigibody.mass = 0.001f;
-        rigibody.useGravity = true;
+        var rigibody = this.gameObject.GetComponent<Rigidbody>();
+        //rigibody.mass = 0.001f;
+        //rigibody.useGravity = true;
         if (prev != null)
         {
-            var hingeJoint = this.gameObject.AddComponent<HingeJoint>();
+            var hingeJoint = this.gameObject.GetComponent<HingeJoint>();
             hingeJoint.connectedBody = prev.GetComponent<Rigidbody>();
             if(prev.m_type == FourPipelineJointType.Horizonal)
             {
@@ -54,12 +54,12 @@ public class FourPipelineJointController : MonoBehaviour
                 min = m_rotateLimit.x,
                 max = m_rotateLimit.y,
             };
-            hingeJoint.useSpring = true;
-            hingeJoint.spring = new JointSpring() {
-                spring = 100000*k,
-                damper = 1000*k,
-                targetPosition = 0,
-            };
+            //hingeJoint.useSpring = true;
+            //hingeJoint.spring = new JointSpring() {
+            //    spring = 10000,
+            //    damper = 100,
+            //    targetPosition = 0,
+            //};
             m_hingeJoint = hingeJoint;
         }
         else
@@ -84,6 +84,12 @@ public class FourPipelineJointController : MonoBehaviour
             var springSetting = m_hingeJoint.spring;
             springSetting.targetPosition = m_targetValue;
             m_hingeJoint.spring = springSetting;
+
+            //m_hingeJoint.limits = new JointLimits()
+            //{
+            //    min = m_targetValue,
+            //    max = m_targetValue,
+            //};
         } 
     }
 
