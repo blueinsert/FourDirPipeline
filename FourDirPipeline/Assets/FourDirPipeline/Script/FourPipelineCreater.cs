@@ -9,9 +9,6 @@ public class FourPipelineCreater : MonoBehaviour
     public Vector3 m_jointAxisDir = new Vector3(0, 1, 0);
     public float m_jointOffset;
     public float m_jointRotateDegreeMax = 15f;
-    public bool m_useGravity;
-    public float m_driveStifness = 9999f;
-    public float m_driveDamp = 10000f;
 
     // Start is called before the first frame update
     void Start()
@@ -36,9 +33,6 @@ public class FourPipelineCreater : MonoBehaviour
             FourPipelineJointController ctrl = go.GetComponent<FourPipelineJointController>();
             ctrl.SetLinkType(jointType);
             ctrl.SetRotateLimit(Mathf.Abs(m_jointRotateDegreeMax));
-            float k = m_jointCount - i;
-            ctrl.SetDriveProperty(m_driveStifness*k, m_driveDamp*k);
-            //ctrl.m_articulationBody.useGravity = m_useGravity;
             if (jointType == FourPipelineJointType.Vertical)
                 jointType = FourPipelineJointType.Horizonal;
             else if (jointType == FourPipelineJointType.Horizonal)

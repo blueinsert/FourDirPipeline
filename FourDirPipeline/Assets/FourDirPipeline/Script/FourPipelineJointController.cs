@@ -51,15 +51,6 @@ public class FourPipelineJointController : MonoBehaviour
         m_articulationBody.xDrive = temp;
     }
 
-    public void SetDriveProperty(float stiffness, float damp)
-    {
-        var temp = m_articulationBody.xDrive;
-        //temp.driveType = ArticulationDriveType.Force;
-        temp.stiffness = stiffness;
-        temp.damping = damp;
-        m_articulationBody.xDrive = temp;
-    }
-
     public void SetValue(float value)
     {
         value = (value + 1.0f) / 2;
@@ -77,7 +68,7 @@ public class FourPipelineJointController : MonoBehaviour
             return;
         }
         var sign = Mathf.Sign(m_targetValue - CurrentPrimaryAxisRotation());
-        float rotationChange = sign * Mathf.Abs(dist) * m_speed * Time.fixedDeltaTime;
+        float rotationChange = sign * m_speed * Time.fixedDeltaTime;
         float rotationGoal = CurrentPrimaryAxisRotation() + rotationChange;
         RotateTo(rotationGoal);
     }

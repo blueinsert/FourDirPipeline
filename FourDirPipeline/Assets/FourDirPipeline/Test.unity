@@ -162,9 +162,6 @@ MonoBehaviour:
   m_jointAxisDir: {x: 0, y: 1, z: 0}
   m_jointOffset: 2
   m_jointRotateDegreeMax: 12
-  m_useGravity: 0
-  m_driveStifness: 100000
-  m_driveDamp: 1000
 --- !u!65 &75961496
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -249,7 +246,7 @@ ArticulationBody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_Immovable: 0
+  m_Immovable: 1
   m_UseGravity: 0
   m_CollisionDetectionMode: 0
 --- !u!23 &75961498
@@ -966,9 +963,6 @@ MonoBehaviour:
   m_jointAxisDir: {x: 0, y: 1, z: 0}
   m_jointOffset: 0.286
   m_jointRotateDegreeMax: 6
-  m_useGravity: 0
-  m_driveStifness: 9999
-  m_driveDamp: 10000
 --- !u!65 &1499172605
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1297,9 +1291,6 @@ MonoBehaviour:
   m_jointAxisDir: {x: 0, y: 1, z: 0}
   m_jointOffset: 2
   m_jointRotateDegreeMax: 6
-  m_useGravity: 1
-  m_driveStifness: 9999
-  m_driveDamp: 10000
 --- !u!1 &1861078098
 GameObject:
   m_ObjectHideFlags: 0
